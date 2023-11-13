@@ -1,0 +1,29 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% comment %} <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% endcomment %}
+        <title>Backend</title>
+        {% comment %} <meta name="description" content=""> {% endcomment %}
+        {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1"> {% endcomment %}
+        {% comment %} <link type="text/css" rel="stylesheet" href="{% static "video/css/background.css" %}"> {% endcomment %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+            {% for link in menu %}
+                <li><a href="{% url link.url_name %}">{{ link.title }}</a></li>
+            {% endfor %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

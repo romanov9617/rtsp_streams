@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Мои камеры</h1>
+    {% for video in videos%}
+    <a href='{{ video.get_absolute_url }}'> {{video.camera_name}} </a>
+    <br>
+    {% endfor %}
+    <a href='{% url "add_camera" %}'>Добавить камеру</a>
+    {% for video in object_list %}
+        <p>{{video.rstp_link}}</p>
+    {% endfor %}
+{% endblock %}

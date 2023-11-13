@@ -1,0 +1,10 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Открытые камеры</h1>
+    {% for video in videos%}
+    <a href='{{ video.get_absolute_url }}'> {{video.camera_name}} </a>
+    <br>
+    {% endfor %}
+{% endblock %}

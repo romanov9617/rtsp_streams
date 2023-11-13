@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление видео-потоков</title>
+</head>
+<body>
+    <h1>Добавить новый видео-поток</h1>
+    <form id="form-container" method="POST">
+        {% csrf_token %}
+        {{video_formset.management_form}}
+        {% for form in video_formset %}
+        <div class="video-form">
+        {{form.as_p}}
+        <br>
+        </div>
+        {% endfor %}
+        <button id="add-form" type="button">Добавить еще один видео-поток</button>
+        <button type="submit">Создать видео-потоки</button>
+    </form>
+
+
+    <script>
+        let videoForm = document.querySelectorAll(".video-form")
+        let container = document.querySelector("#form-container")
+        let addButton = document.querySelector("#add-form")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+        let formNum = videoForm.length-1
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = videoForm[0].cloneNode(true)
+            let formRegex = RegExp(`form-(\\d){1}-`,'g')
+
+            formNum++
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+            container.insertBefore(newForm, addButton)
+
+            totalForms.setAttribute('value', `${formNum+1}`)
+        }
+    </script>
+    </body>
+</html>
